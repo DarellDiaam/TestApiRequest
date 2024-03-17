@@ -24,7 +24,7 @@ class App extends Component {
         {this.state.capsules.map((capsules) => (
           <div>
             <h1>{capsules.capsule_serial}</h1>
-            <span>{capsules.capsule_id}</span>
+            <span style={{ fontWeight: "900" }}>{capsules.capsule_id}</span>
             <br />
             <span>{capsules.status}</span> <br />
             <span>{capsules.original_launch}</span> <br />
