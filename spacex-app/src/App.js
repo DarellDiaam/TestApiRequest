@@ -1,32 +1,36 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Component } from "react";
+import capsules from "./components/capsules";
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      capsules: [],
+    };
+  }
   //Fetch API data
   componentDidMount() {
     fetch("https://api.spacexdata.com/v3/capsules")
       .then((response) => response.json())
-      .then((capsules) => console.log(capsules));
+      .then((capsules) => this.setState({ capsules: capsules }));
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {this.state.capsules.map((capsules) => (
+          <div>
+            <h1>{capsules.capsule_serial}</h1>
+            <span>{capsules.capsule_id}</span>
+            <br />
+            <span>{capsules.status}</span> <br />
+            <span>{capsules.original_launch}</span> <br />
+            <span>{capsules.original_launch_unix}</span>
+          </div>
+        ))}
       </div>
     );
   }
